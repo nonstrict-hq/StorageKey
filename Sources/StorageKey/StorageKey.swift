@@ -24,7 +24,7 @@ public struct StorageKey<Value> {
 }
 
 extension StorageKey where Value: ExpressibleByNilLiteral {
-    public init(_ key: String) {
+    public init(_ key: String) where Value == Bool? {
         self.key = key
         self.initial = nil
     }
