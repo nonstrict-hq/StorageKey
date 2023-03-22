@@ -14,7 +14,8 @@ public struct StorageKey<Value> {
     public let key: String
     public let initial: Value
 
-    public var wrappedValue: Self { self }
+    public var wrappedValue: Value { initial }
+    public var projectedValue: Self { self }
 
     public init(wrappedValue: Value, _ key: String) {
         self.key = key
