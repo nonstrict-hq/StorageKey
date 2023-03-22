@@ -65,22 +65,15 @@ extension AppStorage {
         self.init(wrappedValue: storageKey.initial, storageKey.key, store: store)
     }
 }
+
+
+extension AppStorage where Value: ExpressibleByNilLiteral {
+
+    /// Creates a property that can read and write an Optional boolean user default.
+    public init(_ storageKey: StorageKey<Value>, store: UserDefaults? = nil) where Value == Bool? {
+        self.init(storageKey.key, store: store)
+    }
 /*
-
-extension AppStorage where Value : ExpressibleByNilLiteral {
-
-    /// Creates a property that can read and write an Optional boolean user
-    /// default.
-    ///
-    /// Defaults to nil if there is no restored value.
-    ///
-    /// - Parameters:
-    ///   - key: The key to read and write the value to in the user defaults
-    ///     store.
-    ///   - store: The user defaults store to read and write to. A value
-    ///     of `nil` will use the user default store from the environment.
-    public init(_ key: String, store: UserDefaults? = nil) where Value == Bool?
-
     /// Creates a property that can read and write an Optional integer user
     /// default.
     ///
@@ -192,5 +185,5 @@ extension AppStorage {
     ///   - store: The user defaults store to read and write to. A value
     ///     of `nil` will use the user default store from the environment.
     public init<R>(_ key: String, store: UserDefaults? = nil) where Value == R?, R : RawRepresentable, R.RawValue == Int
+ */
 }
-*/
