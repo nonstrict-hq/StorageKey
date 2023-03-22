@@ -22,6 +22,13 @@ public struct StorageKey<Value> {
     }
 }
 
+extension StorageKey where Value: ExpressibleByNilLiteral {
+    public init(_ key: String) {
+        self.key = key
+        self.initial = nil
+    }
+}
+
 // MARK: AppStorage extensions
 
 extension AppStorage {
