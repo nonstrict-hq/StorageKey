@@ -17,45 +17,52 @@ public struct StorageKey<Value> {
     public var wrappedValue: Value { initial }
     public var projectedValue: Self { self }
 
-    public init(key: String, initial: Value) {
-        self.key = key
-        self.initial = initial
+    /// Method used to create extensions
+    public static func _create(key: String, initial: Value) -> StorageKey<Value> {
+        .init(key: key, initial: initial)
     }
 }
 
-
 extension StorageKey {
+
+    /// Creates a property that stores a key name and initial boolean value.
     public init(wrappedValue: Value, _ key: String) where Value == Bool {
         self.key = key
         self.initial = wrappedValue
     }
 
+    /// Creates a property that stores a key name and initial integer value.
     public init(wrappedValue: Value, _ key: String) where Value == Int {
         self.key = key
         self.initial = wrappedValue
     }
 
+    /// Creates a property that stores a key name and initial double value.
     public init(wrappedValue: Value, _ key: String) where Value == Double {
         self.key = key
         self.initial = wrappedValue
     }
 
+    /// Creates a property that stores a key name and initial string value.
     public init(wrappedValue: Value, _ key: String) where Value == String {
         self.key = key
         self.initial = wrappedValue
     }
 
+    /// Creates a property that stores a key name and initial url value.
     public init(wrappedValue: Value, _ key: String) where Value == URL {
         self.key = key
         self.initial = wrappedValue
     }
 
+    /// Creates a property stores a key name and initial integer value, transforming that to `RawRepresentable` data type.
     public init(wrappedValue: Value, _ key: String) where Value: RawRepresentable, Value.RawValue == Int {
         self.key = key
         self.initial = wrappedValue
     }
 
-    public init(wrappedValue: Value, _ key: String) where Value: RawRepresentable, Value.RawValue == Data {
+    /// Creates a property stores a key name and initial string value, transforming that to `RawRepresentable` data type.
+    public init(wrappedValue: Value, _ key: String) where Value: RawRepresentable, Value.RawValue == String {
         self.key = key
         self.initial = wrappedValue
     }
@@ -63,37 +70,45 @@ extension StorageKey {
 
 
 extension StorageKey where Value: ExpressibleByNilLiteral {
+
+    /// Creates a property that stores a key name for an Optional boolean value.
     public init(_ key: String) where Value == Bool? {
         self.key = key
         self.initial = nil
     }
 
+    /// Creates a property that stores a key name for an Optional integer value.
     public init(_ key: String) where Value == Int? {
         self.key = key
         self.initial = nil
     }
 
+    /// Creates a property that stores a key name for an Optional double value.
     public init(_ key: String) where Value == Double? {
         self.key = key
         self.initial = nil
     }
 
+    /// Creates a property that stores a key name for an Optional string value.
     public init(_ key: String) where Value == String? {
         self.key = key
         self.initial = nil
     }
 
+    /// Creates a property that stores a key name for an Optional url value.
     public init(_ key: String) where Value == URL? {
         self.key = key
         self.initial = nil
     }
 
-    public init(_ key: String) where Value: RawRepresentable, Value.RawValue == Int? {
+    /// Creates a property stores a key name for an Optional string value, transforming that to `RawRepresentable` data type.
+    public init<R>(_ key: String) where Value == R?, R: RawRepresentable, R.RawValue == String {
         self.key = key
         self.initial = nil
     }
 
-    public init(_ key: String) where Value: RawRepresentable, Value.RawValue == Data? {
+    /// Creates a property stores a key name for an Optional integer value, transforming that to `RawRepresentable` data type.
+    public init<R>(_ key: String) where Value == R?, R: RawRepresentable, R.RawValue == Int {
         self.key = key
         self.initial = nil
     }
@@ -187,7 +202,6 @@ extension AppStorage {
     }
 
     /// Creates a property that can save and restore an Optional integer, transforming it to an Optional `RawRepresentable` data type.
-
     public init<R>(_ storageKey: StorageKey<Value>, store: UserDefaults? = nil) where Value == R?, R: RawRepresentable, R.RawValue == Int {
         self.init(storageKey.key, store: store)
     }
