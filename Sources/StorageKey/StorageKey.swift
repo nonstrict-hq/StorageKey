@@ -10,7 +10,9 @@ import SwiftUI
 
 /// Value that stores a key name and an initial default value. For use with @AppStorage and @SceneStorage.
 @propertyWrapper
-public struct StorageKey<Value> {
+public struct StorageKey<Value>: Identifiable {
+    public var id: String { key }
+
     public let key: String
     public let initial: Value
 
