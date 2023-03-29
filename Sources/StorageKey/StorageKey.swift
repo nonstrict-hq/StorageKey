@@ -208,3 +208,48 @@ extension AppStorage {
         self.init(storageKey.key, store: store)
     }
 }
+
+// MARK: SceneStorage extensions
+
+extension SceneStorage {
+
+    /// Creates a property that can read and write to a boolean user default.
+    public init(_ storageKey: StorageKey<Value>) where Value == Bool {
+        self.init(wrappedValue: storageKey.initial, storageKey.key)
+    }
+
+    /// Creates a property that can read and write to an integer user default.
+    public init(_ storageKey: StorageKey<Value>) where Value == Int {
+        self.init(wrappedValue: storageKey.initial, storageKey.key)
+    }
+
+    /// Creates a property that can read and write to a double user default.
+    public init(_ storageKey: StorageKey<Value>) where Value == Double {
+        self.init(wrappedValue: storageKey.initial, storageKey.key)
+    }
+
+    /// Creates a property that can read and write to a string user default.
+    public init(_ storageKey: StorageKey<Value>) where Value == String {
+        self.init(wrappedValue: storageKey.initial, storageKey.key)
+    }
+
+    /// Creates a property that can read and write to a url user default.
+    public init(_ storageKey: StorageKey<Value>) where Value == URL {
+        self.init(wrappedValue: storageKey.initial, storageKey.key)
+    }
+
+    /// Creates a property that can read and write to a user default as data.
+    public init(_ storageKey: StorageKey<Value>) where Value == Data {
+        self.init(wrappedValue: storageKey.initial, storageKey.key)
+    }
+
+    /// Creates a property that can read and write to an integer user default, transforming that to `RawRepresentable` data type.
+    public init(_ storageKey: StorageKey<Value>) where Value: RawRepresentable, Value.RawValue == Int {
+        self.init(wrappedValue: storageKey.initial, storageKey.key)
+    }
+
+    /// Creates a property that can read and write to a string user default, transforming that to `RawRepresentable` data type.
+    public init(_ storageKey: StorageKey<Value>) where Value: RawRepresentable, Value.RawValue == String {
+        self.init(wrappedValue: storageKey.initial, storageKey.key)
+    }
+}
