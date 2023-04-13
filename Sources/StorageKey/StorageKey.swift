@@ -109,6 +109,12 @@ extension StorageKey where Value: ExpressibleByNilLiteral {
         self.initial = nil
     }
 
+    /// Creates a property that stores a key name for an Optional data value.
+    public init(_ key: String) where Value == Data? {
+        self.key = key
+        self.initial = nil
+    }
+
     /// Creates a property stores a key name for an Optional string value, transforming that to `RawRepresentable` data type.
     public init<R>(_ key: String) where Value == R?, R: RawRepresentable, R.RawValue == String {
         self.key = key
