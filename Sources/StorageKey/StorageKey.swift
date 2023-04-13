@@ -57,6 +57,12 @@ extension StorageKey {
         self.initial = wrappedValue
     }
 
+    /// Creates a property that stores a key name and initial data value.
+    public init(wrappedValue: Value, _ key: String) where Value == Data {
+        self.key = key
+        self.initial = wrappedValue
+    }
+
     /// Creates a property stores a key name and initial integer value, transforming that to `RawRepresentable` data type.
     public init(wrappedValue: Value, _ key: String) where Value: RawRepresentable, Value.RawValue == Int {
         self.key = key
